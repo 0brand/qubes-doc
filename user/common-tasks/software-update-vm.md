@@ -11,6 +11,10 @@ redirect_from:
 Installing and updating software in VMs
 =======================================
 
+Updating TemplateVMs and StandaloneVMs are two of the main steps in [Updating Qubes OS].
+It is very import to keep TemplateVMs and StandaloneVMs up-to-date with the latest [security] updates.
+Updating these VMs also allows you to receive various non-security bug fixes and enhancements both from the Qubes OS Project and from your upstream distro maintainer.
+
 How TemplateVMs work in Qubes
 ------------------------------
 
@@ -157,7 +161,8 @@ qvm-create --class StandaloneVM --label <label> --property virt_mode=hvm <vmname
 
 ... or click appropriate options in the Qubes Manager's Create VM window.
 
-(Note: Technically, `virt_mode=hvm` is not necessary for every StandaloneVM. However, it makes sense if you want to use a kernel from within the VM.)
+(Note: Technically, `virt_mode=hvm` is not necessary for every StandaloneVM.
+However, it makes sense if you want to use a kernel from within the VM.)
 
 
 Using more than one template
@@ -217,12 +222,12 @@ This new design allows for templates to be updated even when they are not connec
 Example policy file in R4.0 (with whonix installed, but not set as default updatevm for all templates):
 ```
 # any VM with tag `whonix-updatevm` should use `sys-whonix`; this tag is added to `whonix-gw` and `whonix-ws` during installation and is preserved during template clone
-$tag:whonix-updatevm $default allow,target=sys-whonix
-$tag:whonix-updatevm $anyvm deny
+@tag:whonix-updatevm @default allow,target=sys-whonix
+@tag:whonix-updatevm @anyvm deny
 
 # other templates use sys-net
-$type:TemplateVM $default allow,target=sys-net
-$anyvm $anyvm deny
+@type:TemplateVM @default allow,target=sys-net
+@anyvm @anyvm deny
 ```
 
 Note on treating AppVM's root filesystem non-persistence as a security feature
@@ -254,4 +259,8 @@ If you would like to enable the [RPM Fusion](http://rpmfusion.org/) repository, 
 sudo dnf config-manager --set-enabled rpmfusion-free rpmfusion-nonfree
 sudo dnf upgrade --refresh
 ~~~
+
+
+[Updating Qubes OS]: /doc/updating-qubes-os/
+[security]: /security/
 

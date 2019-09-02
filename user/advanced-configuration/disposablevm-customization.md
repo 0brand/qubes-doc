@@ -48,7 +48,7 @@ Additionally you may want to set it as default DisposableVM Template:
 
     [user@dom0 ~]$ qubes-prefs default_dispvm custom-disposablevm-template
 
-The above default is used whenever a qube request starting a new DisposableVM and do not specify which one (for example `qvm-open-in-dvm` tool). This can be also set in qube settings and will affect service calls from that qube. See [qrexec documentation](/doc/qrexec3/#extra-keywords-available-in-qubes-40-and-later) for details.
+The above default is used whenever a qube request starting a new DisposableVM and do not specify which one (for example `qvm-open-in-dvm` tool). This can be also set in qube settings and will affect service calls from that qube. See [qrexec documentation](/doc/qrexec/#specifying-vms-tags-types-targets-etc) for details.
 
 If you wish to use the `fedora-minimal` template as a DisposableVM Template, see the "DisposableVM Template" use case under [fedora-minimal customization](/doc/templates/fedora-minimal/#customization).
 
@@ -106,6 +106,8 @@ qvm-prefs <sys-VMName> provides_network true
 ~~~
 
 Next, set the old `sys-` VM's autostart to false, and update any references to the old one.
+In particular, make sure to update `/etc/qubes-rpc/policy/qubes.UpdatesProxy` in dom0.
+
 For example, `qvm-prefs sys-firewall netvm <sys-VMName>`.
 See below for a complete example of a `sys-net` replacement:
 
